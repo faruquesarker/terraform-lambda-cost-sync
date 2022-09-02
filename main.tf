@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "lambda_bucket" {
 }
 
 # Retrieve DynamoDB table data
-data "aws_dynamodb_table" "this" {
+data "aws_dynamodb_table" "current" {
   name = var.dynamodb_table_name
 }
 
@@ -51,7 +51,7 @@ resource "aws_iam_policy" "policy_lambda_exec_01" {
           "dynamodb:DeleteTable",
         ]
         Effect   = "Allow"
-        Resource = "${data.aws_dynamodb_table.this.arn}"
+        Resource = "${data.aws_dynamodb_table.current.arn}"
       },
       {
         "Sid" : "ListObjectsInBucket",
