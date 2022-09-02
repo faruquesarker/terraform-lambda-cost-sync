@@ -51,7 +51,7 @@ resource "aws_iam_policy" "policy_cost_sync_lambda_exec_01" {
           "dynamodb:DeleteTable",
         ]
         # Just a comment line
-        Resource = "${aws_dynamodb_table.current.arn}"
+        Resource = "${data.aws_dynamodb_table.current.arn}"
         Effect   = "Allow"
       },
       {
