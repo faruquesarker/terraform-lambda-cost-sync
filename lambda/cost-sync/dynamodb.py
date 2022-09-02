@@ -59,7 +59,10 @@ def get_all_items(projection_expression=None):
         if projection_expression is None:
             response = table.scan()
         else:
-            response = table.scan(ProjectionExpression=projection_expression)
+            short_projection_expression = "#o"
+            expression_attr_names = {short_projection_expression: projection_expression}
+            response = table.scan(ProjectionExpression=short_projection_expression,
+                                  ExpressionAttributeNames=expression_attr_names)
         data = response['Items']
         
         while 'LastEvaluatedKey' in response:
