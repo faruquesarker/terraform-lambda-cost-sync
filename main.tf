@@ -51,7 +51,7 @@ resource "aws_iam_policy" "policy_lambda_exec_01" {
           "dynamodb:DeleteTable",
         ]
         Effect   = "Allow"
-        Resource = "${data.aws_dynamodb_table.current.arn}"
+        Resource = "${aws_dynamodb_table.current.arn}"
       },
       {
         "Sid" : "ListObjectsInBucket",
