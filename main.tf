@@ -50,9 +50,9 @@ resource "aws_iam_policy" "policy_cost_sync_lambda_exec_01" {
           "dynamodb:CreateTable",
           "dynamodb:DeleteTable",
         ]
-        # Just a comment line
-        Resource = "${data.aws_dynamodb_table.current.arn}"
         Effect   = "Allow"
+        # just a comment
+        Resource = "${data.aws_dynamodb_table.current.arn}"
       },
       {
         "Sid" : "ListObjectsInBucket",
