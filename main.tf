@@ -20,7 +20,7 @@ data "aws_dynamodb_table" "current" {
 }
 
 # IAM policies and roles
-resource "aws_iam_policy" "policy_lambda_exec_01" {
+resource "aws_iam_policy" "policy_cost_sync_lambda_exec_01" {
   name = "terraform-lambda-cost-sync-exec-01"
 
   policy = jsonencode({
@@ -50,9 +50,9 @@ resource "aws_iam_policy" "policy_lambda_exec_01" {
           "dynamodb:CreateTable",
           "dynamodb:DeleteTable",
         ]
-        Effect   = "Allow"
         # Just a comment line
         Resource = "${aws_dynamodb_table.current.arn}"
+        Effect   = "Allow"
       },
       {
         "Sid" : "ListObjectsInBucket",
@@ -88,7 +88,7 @@ resource "aws_iam_role" "lambda_exec" {
     ]
   })
 
-  managed_policy_arns = [aws_iam_policy.policy_lambda_exec_01.arn, ]
+  managed_policy_arns = [aws_iam_policy.policy_cost_sync_lambda_exec_01.arn, ]
 
   tags = var.tags
 }
