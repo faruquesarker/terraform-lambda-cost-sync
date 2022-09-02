@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "lambda_bucket" {
 }
 
 # Retrieve DynamoDB table data
-data "aws_dynamodb_table" "current" {
+data "aws_dynamodb_table" "this" {
   name = var.dynamodb_table_name
 }
 
