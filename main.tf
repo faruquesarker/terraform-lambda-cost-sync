@@ -30,10 +30,10 @@ resource "aws_iam_policy" "policy_lambda_exec_01" {
         Action = [
           "ce:Get*",
           "cloudformation:ListStackResources",
-          "cloudformation:DescribeStacks",        
+          "cloudformation:DescribeStacks",
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
-          "logs:PutLogEvents",                 
+          "logs:PutLogEvents",
         ]
         Effect   = "Allow"
         Resource = "*"
@@ -130,7 +130,7 @@ resource "aws_lambda_function" "cost_sync" {
   environment {
     variables = {
       "COST_REPORT_DDB_TABLE_NAME" = data.aws_dynamodb_table.current.name,
-      "REGION"  = var.aws_region
+      "REGION"                     = var.aws_region
     }
   }
 
@@ -154,9 +154,9 @@ resource "aws_cloudwatch_event_rule" "cost_sync_event" {
 }
 
 resource "aws_cloudwatch_event_target" "run_cost_sync" {
-    rule = aws_cloudwatch_event_rule.cost_sync_event.name
-    target_id = "cost_sync"
-    arn = aws_lambda_function.cost_sync.arn
+  rule      = aws_cloudwatch_event_rule.cost_sync_event.name
+  target_id = "cost_sync"
+  arn       = aws_lambda_function.cost_sync.arn
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch_to_call_cost_sync" {
